@@ -1,0 +1,41 @@
+<h1>Basic</h1>
+<div cdkDrag class="basic">
+  I'm Draggable
+  <div cdkDragHandle class="handler"></div>
+</div>
+
+<h1>Sorting</h1>
+
+<cdk-drop (dropped)="onDrop($event)" class="list-sorted">
+  <div *ngFor="let item of items" cdkDrag class="list-sorted__item">
+    {{item}}
+    <!-- <img *cdkDragPlaceholder src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/7817.jpg"> -->
+    <!-- <img *cdkDragPreview src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/7817.jpg"> -->
+  </div>
+</cdk-drop>
+
+<p>{{items | json}}</p>
+
+
+<h1>Lists</h1>
+<section style="display: flex;">
+  <section>
+    <h4>List One</h4>
+    <cdk-drop #listOne [connectedTo]="[listTwo]" class="list-sorted" (dropped)="addToList($event)" [data]="items2">
+      <div *ngFor="let item of items2" cdkDrag class="list-sorted__item">{{item}}</div>
+    </cdk-drop>
+  </section>
+
+  <section>
+    <h4>List Two</h4>
+    <cdk-drop #listTwo [connectedTo]="[listOne]" class="list-sorted" (dropped)="addToList($event)" [data]="items3">
+      <div *ngFor="let item of items3" cdkDrag class="list-sorted__item">{{item}}</div>
+    </cdk-drop>
+  </section>
+
+</section>
+
+
+<!-- <div #dragRoot class="alternate-root" style="width: 200px; height: 200px; background: hotpink">
+  <div cdkDrag cdkDragRootElement=".alternate-root" #dragElement style="width: 100px; height: 100px; background: red;"></div>
+</div> -->
